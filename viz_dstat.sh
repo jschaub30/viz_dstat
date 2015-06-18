@@ -20,9 +20,13 @@ CSV_FN=$1
 HTML_DIR=html.$(date +"%Y%m%d-%H%M%S")
 mkdir -p $HTML_DIR
 cp -r js $HTML_DIR/.
+cp index.html $HTML_DIR/.
+echo Working directory is $HTML_DIR
 cd $HTML_DIR
-echo Starting dstat--use CTRL-C to stop
-dstat --time -v --net --output dstat.csv &
+echo Starting dstat using this command:
+echo "dstat --time -v --net --output dstat.csv"
+echo --use CTRL-C to stop
+dstat --time -v --net --output dstat.csv > /dev/null &
 DSTAT_PID=$!
 echo Now starting http server--point your browser to localhost:12121
 python -m SimpleHTTPServer 12121
