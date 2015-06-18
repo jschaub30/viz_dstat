@@ -7,7 +7,8 @@ Uses these tools
 - [Dygraphs](http://dygraphs.com/) for javascript charts
 
 Usage
-`$ git clone https://github.com/jschaub30/viz_dstat.git
-$ cd viz_dstat/
-$ ./viz_dstat.sh`
+`$ git clone https://github.com/jschaub30/viz_dstat.git`
+`$ cd viz_dstat/`
+`$ ./viz_dstat.sh`
+
 Then point your browser to http://localhost:12121
