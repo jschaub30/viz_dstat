@@ -9,7 +9,7 @@ Also uses [Dygraphs](http://dygraphs.com/) for javascript charts (included)
 
 ##Visualize existing file
 ```
-$ $ dstat --time -v --net --output example.csv 1 10
+$ dstat --time -v --net --output example.csv 1 10
 $ ./viz_dstat.sh example.csv
 ```
 
