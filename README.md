@@ -1,10 +1,11 @@
 # viz_dstat
 Visualize dstat results on a web page.  Can optionally launch dstat and monitor results in real time.
 
-#Uses these tools
+#Requires
 - [dstat](http://dag.wiee.rs/home-made/dstat/)
-- python SimpleHTTPServer for web server
-- [Dygraphs](http://dygraphs.com/) for javascript charts
+- [python](https://www.python.org/)
+
+Also uses [Dygraphs](http://dygraphs.com/) for javascript charts (included)
 
 ##Visualize existing file
 ```
