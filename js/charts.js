@@ -3,8 +3,6 @@
 	DIV_WIDTH = WIN_WIDTH / 2 - 100;
 })();
 
-console.log('Read charts.js');
-
 var time0 = -1;
 
 var parse_line = function() {
@@ -35,7 +33,6 @@ function load_summary() {
 		url: csv_fn,
 		dataType: "text",
 		success: function(data) {
-			console.log('read dstat file');
 			var i = 0,
 			flag = true,
 			lines = data.split('\n');
