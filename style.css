@@ -1,0 +1,26 @@
+div.section {
+  width: 98%;
+  min-height: 400px;
+  margin: auto;
+  padding: 10px;
+}
+div.one {
+  width: 48%;
+  min-height: 400px;
+  float: left;
+}
+div.two {
+  margin-left: 52%;
+  min-height: 400px;
+}
+p#id_error {
+  background: red;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+/*    margin: 1em auto 4em auto;
+    position: relative;
+    tab-size: 2;
+    width: 100%;
+        padding: 10px;
+*/}

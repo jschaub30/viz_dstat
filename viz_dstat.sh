@@ -12,6 +12,7 @@ CSV_FN=$1
 HTML_DIR=html.$(date +"%Y%m%d-%H%M%S")
 mkdir -p $HTML_DIR
 cp -r js $HTML_DIR/.
+cp style.css $HTML_DIR/.
 echo Working directory is $HTML_DIR
 
 kill_server() {
@@ -43,6 +44,6 @@ echo Starting web server--point your browser to http://localhost:12121
 echo 
 python -m SimpleHTTPServer 12121 2> http_log&
 SRV_PID=$!
-sleep 0.3
+sleep 0.5
 read -p "Press return to stop web server $ARG"
 kill_server

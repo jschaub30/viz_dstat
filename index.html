@@ -1,56 +1,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
 <head>
+  <link href="style.css" rel="stylesheet">
   <script src="js/jquery.min.js" type="text/javascript"></script>
   <script src="js/jquery.csv-0.71.js" type="text/javascript"></script>
   <script type="text/javascript"  src="js/dygraph-combined.js"></script>
   <title id="id_title">DSTAT viewer</title>
-  <style type="text/css" media="screen">
-  section {
-    width: 98%;
-    min-height: 400px;
-    margin: auto;
-    padding: 10px;
-  }
-  div.one {
-    width: 48%;
-    min-height: 400px;
-    float: left;
-  }
-  div.two {
-    margin-left: 52%;
-    min-height: 400px;
-  }
-  p#id_error {
-    background: red;
-  }
-  </style>
 </head>
 <body>
+  <a href="https://github.com/jschaub30/viz_dstat" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" alt="Fork me on GitHub" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>
   <h2>Visualize dstat measurement</h2>
+  <p id="id_header"></p>
   <p><span id="id_refresh"></span>View CSV file <a href="dstat.csv">here.</a></p>
   <p id="id_error"></p>
-  <section>
+  <div class="section">
     <div class="one">
-      <h3>CPU</h3>
       <div id="id_cpu"></div>
     </div>
     <div class="two">
-      <h3>Memory</h3>
       <div id="id_mem"></div>
     </div>
-  </section>
+  </div>
   <p><br></p>
-  <section>
+  <div class="section">
     <div class="one">
-      <h3>IO</h3>
       <div class="chart" id="id_io"></div>
     </div>
     <div class="two">
-      <h3>Network</h3>
       <div class="chart" id="id_net"></div>
     </div>
-  </section>
+  </div>
   <script type='text/javascript'>
   var csv_fn="dstat.csv",
   refresh_page = false;

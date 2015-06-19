@@ -40,7 +40,7 @@ var parse_line = function() {
 
 function load_csv() {
 	//Read csv data 
-	console.log('load_csv');
+  // console.log('load_csv');
 	$.ajax({
 		type: "GET",
 		url: csv_fn,
@@ -57,23 +57,15 @@ function load_csv() {
 				i += 1;
 			}
 			var labels = lines[i],
-			header = lines.slice(0, i),
+			header = lines.slice(0, i-2),
 			body = lines.slice(i, lines.length);
 			
+      header = header.join([separator = '<br>']);
+      $("#id_header").html(header);
 			header_lines = i;  // Used in error message in parse_line()
 
 			var csv_data = $.csv.toObjects(body.join([separator = '\n']));
 			// console.log(csv_data);
-			net_data = csv_data.map(
-				function(x, i) {
-					return parse_line(x, i, 1e-6, "recv", "send");
-				}
-			);
-			io_data = csv_data.map(
-				function(x, i) {
-					return parse_line(x, i, 1e-6, "read", "writ");
-				}
-			);
 			cpu_data = csv_data.map(
 				function(x, i) {
 					return parse_line(x, i, 1, "usr","sys","idl","wai");
@@ -84,11 +76,21 @@ function load_csv() {
 					return parse_line(x, i, 1e-9, "used", "buff", "cach", "free");
 				}
 			);
+			io_data = csv_data.map(
+				function(x, i) {
+					return parse_line(x, i, 1e-6, "read", "writ");
+				}
+			);
+			net_data = csv_data.map(
+				function(x, i) {
+					return parse_line(x, i, 1e-6, "recv", "send");
+				}
+			);
 				
-			csv_chart(net_data, "id_net", ["time", "recv", "send"], "Usage [ MB/s ]")
-			csv_chart(io_data, "id_io", ["time", "read", "write"], "Usage [ MB/s ]")
-			csv_chart(cpu_data, "id_cpu", ["time", "user", "system", "idle", "wait"], "Usage [ % ]")
-			csv_chart(mem_data, "id_mem", ["time", "used", "buff", "cache", "free"], "Usage [ GB ]")
+			csv_chart(cpu_data, "id_cpu", "CPU", ["time", "user", "system", "idle", "wait"], "Usage [ % ]")
+			csv_chart(mem_data, "id_mem", "Memory", ["time", "used", "buff", "cache", "free"], "Usage [ GB ]")
+			csv_chart(io_data, "id_io", "IO", ["time", "read", "write"], "Usage [ MB/s ]")
+			csv_chart(net_data, "id_net", "Network", ["time", "recv", "send"], "Usage [ MB/s ]")
 		},
 		error: function(request, status, error) {
 			console.log(error);
@@ -96,7 +98,7 @@ function load_csv() {
 	});
 };
 
-function csv_chart(data, id, labels, ylabel) {
+function csv_chart(data, id, title, labels, ylabel) {
 	// console.log(DIV_WIDTH);
 	chart = new Dygraph(
 		document.getElementById(id),
@@ -111,7 +113,8 @@ function csv_chart(data, id, labels, ylabel) {
 			ylabel: ylabel,
 			strokeWidth: 2,
 			legend: 'always',
-			labelsDivWidth: 300
+			labelsDivWidth: 350,
+      title: title
 		}
 	)
 	return chart
