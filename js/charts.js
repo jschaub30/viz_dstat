@@ -1,8 +1,3 @@
-(function() {
-	var WIN_WIDTH = $(window).width()
-	DIV_WIDTH = WIN_WIDTH / 2 - 100;
-})();
-
 var time0 = -1,
     header_lines; // Used in error message in parse_line()
 
@@ -125,13 +120,11 @@ function csv_chart(data, id, title, labels, ylabel) {
 			labels: labels,
 			//http://colorbrewer2.org/  <- qualitative, 6 classes
 			colors: ['rgb(228,26,28)','rgb(55,126,184)','rgb(77,175,74)','rgb(152,78,163)','rgb(255,127,0)','rgb(141,211,199)'],
-			width: DIV_WIDTH,
-			height: 400,
 			xlabel: "Elapsed time [ sec ]",
 			ylabel: ylabel,
 			strokeWidth: 2,
 			legend: 'always',
-			labelsDivWidth: 350,
+			labelsDivWidth: 500,
       title: title
 		}
 	)
