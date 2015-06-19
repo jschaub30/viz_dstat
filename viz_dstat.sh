@@ -22,10 +22,9 @@ then
   }
   trap 'kill_dstat' SIGTERM SIGINT # Kill dstat when webserver is killed
   cp index.html $HTML_DIR/.
-  cd $HTML_DIR
   echo Starting dstat using this command:
   echo "dstat --time -v --net --output dstat.csv"
-  dstat --time -v --net --output dstat.csv > /dev/null &
+  dstat --time -v --net --output $HTML_DIR/dstat.csv > /dev/null &
   DSTAT_PID=$!
   ARG="and dstat measurement"
 else
