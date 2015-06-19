@@ -68,7 +68,7 @@ function load_csv() {
 			// console.log(csv_data);
 			cpu_data = csv_data.map(
 				function(x, i) {
-					return parse_line(x, i, 1, "usr","sys","idl","wai");
+					return parse_line(x, i, 1, "usr", "sys", "idl", "wai", "hiq", "siq");
 				}
 			);
 			mem_data = csv_data.map(
@@ -86,11 +86,29 @@ function load_csv() {
 					return parse_line(x, i, 1e-6, "recv", "send");
 				}
 			);
+			sys_data = csv_data.map(
+				function(x, i) {
+					return parse_line(x, i, 1, "int", "csw");
+				}
+			);
+			proc_data = csv_data.map(
+				function(x, i) {
+					return parse_line(x, i, 1, "run", "blk", "new");
+				}
+			);
+			pag_data = csv_data.map(
+				function(x, i) {
+					return parse_line(x, i, 1, "in", "out");
+				}
+			);
 				
-			csv_chart(cpu_data, "id_cpu", "CPU", ["time", "user", "system", "idle", "wait"], "Usage [ % ]")
+			csv_chart(cpu_data, "id_cpu", "CPU", ["time", "user", "system", "idle", "wait", "hiq", "siq"], "Usage [ % ]")
 			csv_chart(mem_data, "id_mem", "Memory", ["time", "used", "buff", "cache", "free"], "Usage [ GB ]")
 			csv_chart(io_data, "id_io", "IO", ["time", "read", "write"], "Usage [ MB/s ]")
 			csv_chart(net_data, "id_net", "Network", ["time", "recv", "send"], "Usage [ MB/s ]")
+			csv_chart(net_data, "id_sys", "System", ["time", "interrupts", "context switches"], "")
+			csv_chart(proc_data, "id_proc", "Processes", ["time", "run", "blk", "new"], "")
+			csv_chart(pag_data, "id_pag", "Paging", ["time", "in", "out"], "")
 		},
 		error: function(request, status, error) {
 			console.log(error);
@@ -105,8 +123,8 @@ function csv_chart(data, id, title, labels, ylabel) {
 		data, 
 		{
 			labels: labels,
-			//http://colorbrewer2.org/
-			colors: ['rgb(228,26,28)', 'rgb(55,126,184)', 'rgb(77,175,74)', 'rgb(152,78,163)'],
+			//http://colorbrewer2.org/  <- qualitative, 6 classes
+			colors: ['rgb(228,26,28)','rgb(55,126,184)','rgb(77,175,74)','rgb(152,78,163)','rgb(255,127,0)','rgb(141,211,199)'],
 			width: DIV_WIDTH,
 			height: 400,
 			xlabel: "Elapsed time [ sec ]",
