@@ -21,11 +21,15 @@
     margin-left: 52%;
     min-height: 400px;
   }
+  p#id_error {
+    background: red;
+  }
   </style>
 </head>
 <body>
   <h2>Visualize dstat measurement</h2>
-  <p>Refresh page if measurement is ongoing.  View CSV file <a href="dstat.csv">here</a></p>
+  <p><span id="id_refresh"></span>View CSV file <a href="dstat.csv">here.</a></p>
+  <p id="id_error"></p>
   <section>
     <div class="one">
       <h3>CPU</h3>
@@ -48,7 +52,8 @@
     </div>
   </section>
   <script type='text/javascript'>
-  var csv_fn="dstat.csv";
+  var csv_fn="dstat.csv",
+  refresh_page = false;
   </script>
   <script src='js/charts.js' type='text/javascript'> </script>
 
