@@ -8,17 +8,23 @@ var parse_line = function() {
   day,
   month,
   time,
-  arr;
+  arr,
+  time_ms;
   
   try {
     day = line.time.split('-')[0];
     month = line.time.split('-')[1].split(' ')[0];
-    time = line.time.split(' ')[1];
+    time = line.time.split(' ')[1].split(':');
     arr = [];
-    time_ms = Date.parse("2015-" + month + '-' + day + ' ' + time);
+    //time_str = "2015-" + month + '-' + day + ' ' + time
+    time_ms = new Date ("2015", month, day , time[0], time[1], time[2]);
+    //console.log(time_str);
+    //time_ms = Date.parse(time_str);
+    //console.log(time_ms);
     if (time0 == -1) {
       time0 = time_ms;
     }
+    console.log((time_ms - time0) / 1000);
     arr.push((time_ms - time0) / 1000);
 
     for (var i = 3; i < arguments.length; i++) {
@@ -35,7 +41,7 @@ var parse_line = function() {
 
 function load_csv() {
   //Read csv data 
-  // console.log('load_csv');
+  //console.log('load_csv');
   $.ajax({
     type: "GET",
     url: csv_fn,
@@ -106,13 +112,15 @@ function load_csv() {
       csv_chart(pag_data, "id_pag", "Paging", ["time", "in", "out"], "")
     },
     error: function(request, status, error) {
+      console.log(status);
       console.log(error);
     }
   });
 };
 
 function csv_chart(data, id, title, labels, ylabel) {
-  // console.log(DIV_WIDTH);
+  //console.log('csv_chart');
+  //console.log(data);
   chart = new Dygraph(
     document.getElementById(id),
     data, 
