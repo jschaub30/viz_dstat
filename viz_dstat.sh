@@ -26,12 +26,14 @@ trap 'kill_server' SIGTERM SIGINT # Kill measurement when webserver is killed
 if [ $# -lt 1 ]
 then
   # Launch dstat measurement
-  echo Starting dstat using this command:
-  echo "dstat --time -v --net --output dstat.csv"
-  dstat --time -v --net --output $HTML_DIR/dstat.csv > /dev/null &
+  echo Starting dstat for 10 minutes using this command:
+  echo "dstat --time -v --net --output dstat.csv 1 600"
+  dstat --time -v --net --output $HTML_DIR/dstat.csv 1 600 > /dev/null &
   DSTAT_PID=$!
   ARG="and dstat measurement"
-  cat index.html | sed "s/refresh_page = false/refresh_page = true/" > $HTML_DIR/index.html
+  cat index.html | sed "s/refresh_page = false/refresh_page = true/" | \
+     sed "s/Visualize dstat measurement/Visualize dstat measurement on $(hostname)/" \
+     > $HTML_DIR/index.html
 else
   echo Visualizing file $1
   cp $1 $HTML_DIR/.
